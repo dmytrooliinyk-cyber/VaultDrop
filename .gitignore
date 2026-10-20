@@ -1,0 +1,17 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+backend/vaultdrop.db
+storage/*
+!storage/.gitkeep
+frontend/node_modules/
+frontend/dist/
+frontend/*.tsbuildinfo
+.env
+.DS_Store
+coverage/
+.coverage
+htmlcov/
+*.log
+

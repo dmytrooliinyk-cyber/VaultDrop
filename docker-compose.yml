@@ -1,0 +1,38 @@
+services:
+  backend:
+    build: ./backend
+    environment:
+      DATABASE_URL: sqlite:////data/vaultdrop.db
+      STORAGE_DIR: /storage
+      FRONTEND_ORIGIN: http://localhost:5173
+      MAX_UPLOAD_MB: ${MAX_UPLOAD_MB:-100}
+      CLEANUP_INTERVAL_SECONDS: ${CLEANUP_INTERVAL_SECONDS:-300}
+      ACCESS_RATE_LIMIT: ${ACCESS_RATE_LIMIT:-120}
+      MANAGEMENT_RATE_LIMIT: ${MANAGEMENT_RATE_LIMIT:-12}
+      RATE_WINDOW_SECONDS: ${RATE_WINDOW_SECONDS:-60}
+    volumes:
+      - vaultdrop-data:/data
+      - vaultdrop-storage:/storage
+    expose:
+      - "8000"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/api/health', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 5s
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "5173:80"
+    restart: unless-stopped
+
+volumes:
+  vaultdrop-data:
+  vaultdrop-storage:
+
