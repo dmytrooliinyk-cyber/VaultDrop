@@ -175,7 +175,7 @@ The direct `cloudflared tunnel --url ...` command is shown above so you can see 
 
 ## Sending a file
 
-1. Start VaultDrop and open it in a browser.
+1. Start VaultDrop locally. If the file must be shared with another device or network, create a public HTTPS tunnel first using the instructions above.
 2. If the recipient is on another device or network, start the public tunnel first and open the generated `https://...trycloudflare.com` address.
 3. Choose a file.
 4. Select an expiration time and a download limit. Enable one-time download or password protection if needed.
