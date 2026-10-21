@@ -30,6 +30,148 @@ docker compose up --build
 Open <http://localhost:5173>. This address is local to your computer. To send a file to someone outside your network, follow [Public sharing from another network](docs/PUBLIC_SHARING.md).
 
 If you prefer to run the backend and frontend directly, see [Installation and local development](docs/INSTALLATION.md). The Windows guide deliberately uses `npm.cmd`, which also works when PowerShell blocks `npm.ps1` through its execution policy.
+## Create a public link
+
+VaultDrop runs locally by default:
+
+```text
+http://localhost:5173
+```
+
+A `localhost` link works only on your own computer. To share a file with someone over the Internet, create a temporary public HTTPS address with Cloudflare Tunnel.
+
+### Windows
+
+#### 1. Install Cloudflare Tunnel
+
+Open PowerShell and run:
+
+```powershell
+winget install --id Cloudflare.cloudflared
+```
+
+After installation, close PowerShell and open it again.
+
+Check that `cloudflared` is available:
+
+```powershell
+cloudflared --version
+```
+
+#### 2. Make sure VaultDrop is running
+
+Open VaultDrop locally:
+
+```text
+http://localhost:5173
+```
+
+You can also verify the API:
+
+```text
+http://localhost:5173/api/health
+```
+
+Expected response:
+
+```json
+{"status":"ok"}
+```
+
+#### 3. Create a public HTTPS address
+
+Open a new PowerShell window and run:
+
+```powershell
+cloudflared tunnel --url http://localhost:5173
+```
+
+After a few seconds, Cloudflare will display a temporary address similar to:
+
+```text
+https://random-example.trycloudflare.com
+```
+
+Your address will be different.
+
+Keep this PowerShell window open. Closing it will stop the public tunnel.
+
+#### 4. Open VaultDrop through the public address
+
+Copy the generated Cloudflare URL and open it in your browser:
+
+```text
+https://random-example.trycloudflare.com
+```
+
+You should see the same VaultDrop interface, but now through a public HTTPS address.
+
+#### 5. Create the final share link
+
+Upload a file through the public VaultDrop page.
+
+After encryption and upload, VaultDrop will generate a complete share link similar to:
+
+```text
+https://random-example.trycloudflare.com/share/SHARE_ID#k.DECRYPTION_KEY
+```
+
+This is the link you send to the recipient.
+
+Do not send only:
+
+```text
+https://random-example.trycloudflare.com
+```
+
+That URL only opens the VaultDrop application.
+
+The final share URL contains:
+
+```text
+https://PUBLIC_HOST/share/SHARE_ID#DECRYPTION_MATERIAL
+```
+
+The `/share/SHARE_ID` part identifies the encrypted object.
+
+The part after `#` contains the information needed to decrypt the file locally in the recipient's browser.
+
+For a normal share it looks like:
+
+```text
+#k.<key>
+```
+
+For a password-protected share it looks like:
+
+```text
+#p.<salt>.<iv>.<wrapped-key>
+```
+
+The URL fragment after `#` is not sent to the VaultDrop backend during the HTTP request.
+
+### Stop the public tunnel
+
+Return to the PowerShell window running `cloudflared` and press:
+
+```text
+Ctrl+C
+```
+
+The temporary `trycloudflare.com` address will stop working.
+
+### Alternative
+
+VaultDrop also includes a Windows helper script:
+
+```powershell
+.\scripts\start-public-tunnel.cmd
+```
+
+It performs the same tunnel command for you.
+
+The direct `cloudflared tunnel --url ...` command is shown above so you can see exactly what the helper script does.
+
 
 ## Sending a file
 
