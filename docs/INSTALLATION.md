@@ -16,7 +16,7 @@ This is the easiest route if you only want to run the application.
 1. Clone the repository and enter the project directory:
 
    ```bash
-   git clone https://github.com/YOUR_USERNAME/VaultDrop.git
+   git clone https://github.com/GGtascher/VaultDrop.git
    cd VaultDrop
    ```
 
@@ -78,7 +78,7 @@ The `.env` file is ignored by Git. Keep it that way if you later add secrets or 
 - Python 3.12 or newer
 - Node.js 22 or newer, including npm
 
-Confirm the tools are available:
+Check that the required tools are available:
 
 ```powershell
 git --version
@@ -87,48 +87,110 @@ node --version
 npm.cmd --version
 ```
 
-The commands below use `npm.cmd` instead of `npm`. This avoids the common PowerShell error saying that `npm.ps1` cannot be loaded because script execution is disabled.
-
 ### 1. Clone the project
 
+Open PowerShell in any folder where you want to keep the project and run:
+
 ```powershell
-Set-Location -LiteralPath "C:\Projects"
-git clone https://github.com/YOUR_USERNAME/VaultDrop.git
-Set-Location -LiteralPath "C:\Projects\VaultDrop"
+git clone https://github.com/GGtascher/VaultDrop.git
+cd VaultDrop
 ```
 
-You can choose another folder. Replace `C:\Projects\VaultDrop` everywhere with the folder you actually used.
+All commands below assume that the current PowerShell directory is the cloned `VaultDrop` repository.
 
 ### 2. Prepare the backend
 
+Move into the backend directory:
+
 ```powershell
-Set-Location -LiteralPath "C:\Projects\VaultDrop\backend"
+cd backend
+```
+
+Create the virtual environment:
+
+```powershell
 py -3.12 -m venv .venv
+```
+
+Install the Python dependencies:
+
+```powershell
 & ".\.venv\Scripts\python.exe" -m pip install --upgrade pip
 & ".\.venv\Scripts\python.exe" -m pip install -r requirements.txt
 ```
 
-Start the API and leave this terminal open:
+Start the backend:
 
 ```powershell
 & ".\.venv\Scripts\python.exe" -m uvicorn app.main:app --reload --host 127.0.0.1 --port 8000
 ```
 
-Open <http://127.0.0.1:8000/api/health>. You should see `{"status":"ok"}`.
+Keep this PowerShell window open.
 
-### 3. Prepare the frontend
+Check the backend in your browser:
 
-Open a second PowerShell window:
+```text
+http://127.0.0.1:8000/api/health
+```
+
+Expected response:
+
+```json
+{"status":"ok"}
+```
+
+### 3. Start the frontend
+
+Open a second PowerShell window.
+
+Navigate to the same cloned repository, then enter the frontend directory:
 
 ```powershell
-Set-Location -LiteralPath "C:\Projects\VaultDrop\frontend"
+cd path\to\VaultDrop
+cd frontend
+```
+
+Replace:
+
+```text
+path\to\VaultDrop
+```
+
+with the actual location where you cloned the repository.
+
+Then install the frontend dependencies:
+
+```powershell
 npm.cmd ci
+```
+
+Start the frontend:
+
+```powershell
 npm.cmd run dev
 ```
 
-Open <http://localhost:5173>.
+Open:
 
-You now have two running terminals: one for FastAPI and one for Vite. Both must remain open while VaultDrop is in use.
+```text
+http://localhost:5173
+```
+
+Check:
+
+```text
+http://localhost:5173/api/health
+```
+
+You should again receive:
+
+```json
+{"status":"ok"}
+```
+
+VaultDrop is now running locally.
+
+Keep both PowerShell windows open while using the application.
 
 ## Option C: macOS or Linux without Docker
 
