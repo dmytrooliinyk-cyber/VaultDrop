@@ -56,19 +56,17 @@ The repository also contains `scripts/start-public-tunnel.sh`; it works on other
 
 ### Windows
 
-Open a new PowerShell window in the project root:
+
+Open a new PowerShell window in the cloned `VaultDrop` repository root and run:
 
 ```powershell
-Set-Location -LiteralPath "C:\Projects\VaultDrop"
-& ".\scripts\start-public-tunnel.cmd"
+.\scripts\start-public-tunnel.cmd
 ```
-
 ### macOS or Linux
 
 Open a new terminal in the project root:
 
 ```bash
-cd ~/projects/VaultDrop
 sh ./scripts/start-public-tunnel.sh
 ```
 
