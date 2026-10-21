@@ -200,13 +200,14 @@ Keep both PowerShell windows open while using the application.
 - Python 3.12 or newer
 - Node.js 22 or newer, including npm
 
-Clone the project:
-```markdown
-Clone the project into any folder where you want to keep it:
+### 1. Clone the project
+
+Clone the repository into any folder where you want to keep it:
 
 ```bash
 git clone https://github.com/GGtascher/VaultDrop.git
 cd VaultDrop
+```
 
 Prepare and start the backend:
 
