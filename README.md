@@ -22,7 +22,7 @@ When a sender chooses a file, the browser encrypts the file contents and its met
 If Docker Desktop is already installed, this is the quickest way to run VaultDrop:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/VaultDrop.git
+git clone https://github.com/GGtascher/VaultDrop.git
 cd VaultDrop
 docker compose up --build
 ```
