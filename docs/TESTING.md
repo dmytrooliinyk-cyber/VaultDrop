@@ -6,15 +6,16 @@ Run tests from a clean clone before publishing a change. VaultDrop has three use
 
 ### Windows
 
+Open PowerShell in the `VaultDrop` repository root, then run:
+
 ```powershell
-Set-Location -LiteralPath "C:\Projects\VaultDrop\backend"
+cd backend
 & ".\.venv\Scripts\python.exe" -m pytest -q
 ```
 
 ### macOS or Linux
 
 ```bash
-cd ~/projects/VaultDrop/backend
 ./.venv/bin/python -m pytest -q
 ```
 
