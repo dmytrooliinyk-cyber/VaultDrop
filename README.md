@@ -17,6 +17,10 @@ When a sender chooses a file, the browser encrypts the file contents and its met
 - Create a temporary public HTTPS address with Cloudflare Tunnel so a recipient on another network can download the file.
 - Test the API, cryptographic container, URL handling, and a live encrypted transfer.
 
+
+> **Note about file paths:** Paths such as `C:\Projects\VaultDrop`, `~/projects/VaultDrop`, or similar paths shown in the documentation are examples only. Your actual path depends on where you cloned the repository. Run commands from your own `VaultDrop` folder and adjust any example path to match your system.
+>
+> 
 ## The short version
 
 If Docker Desktop is already installed, this is the quickest way to run VaultDrop:
