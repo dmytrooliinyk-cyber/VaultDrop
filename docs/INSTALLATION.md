@@ -16,7 +16,7 @@ This is the easiest route if you only want to run the application.
 1. Clone the repository and enter the project directory:
 
    ```bash
-   git clone https://github.com/GGtascher/VaultDrop.git
+   git clone https://github.com/dmytrooliinyk-cyber/VaultDrop.git
    cd VaultDrop
    ```
 
@@ -92,7 +92,7 @@ npm.cmd --version
 Open PowerShell in any folder where you want to keep the project and run:
 
 ```powershell
-git clone https://github.com/GGtascher/VaultDrop.git
+git clone https://github.com/dmytrooliinyk-cyber/VaultDrop.git
 cd VaultDrop
 ```
 
@@ -205,7 +205,7 @@ Keep both PowerShell windows open while using the application.
 Clone the repository into any folder where you want to keep it:
 
 ```bash
-git clone https://github.com/GGtascher/VaultDrop.git
+git clone https://github.com/dmytrooliinyk-cyber/VaultDrop.git
 cd VaultDrop
 ```
 
